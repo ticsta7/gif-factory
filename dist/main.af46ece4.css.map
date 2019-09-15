@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"main.af46ece4.css","sourceRoot":"..","sourcesContent":["canvas\n{\n    border:1px solid rgb(14, 13, 13);\n}\n\n .downloadBtn\n{\n    margin-top: 50px;\n}"]}
