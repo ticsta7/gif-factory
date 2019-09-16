@@ -10,7 +10,7 @@
     <script src="https://cdn.bootcss.com/fabric.js/3.4.0/fabric.min.js"></script>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/downloadjs/1.4.8/download.min.js"></script>
-
+    <script src="main.js"></script>
     <link rel="stylesheet" href="main.css">
     <title>GIF-factory</title>
 </head>
@@ -40,40 +40,17 @@
             <canvas  id="workSpace" width="460" height="460"></canvas>
             <!-- nav 标签 main 标签？？？ -->
             
-            <div class="downloadBtn">
+            <div class="Btn">
+                
                 <button class="btn btn-primary" onclick="downloadImg()">Download</button>
+                <button class="btn btn-outline-info" onclick="outputInfo()">Info</button>
+
             </div>
 
           </main>
         </div>
       </div>
-          <script>
-          var canvas = new fabric.Canvas('workSpace',{preserveObjectStacking:true});
-
-                // create a rectangle object
-            var rect = new fabric.Rect({
-                            left: 100,
-                            top: 100,
-                            fill: 'blue',
-                            width: 20,
-                            height: 20         });
-            // "add" rectangle onto canvas
-            canvas.add(rect);
-
-            //download按钮
-            function downloadImg()
-            {
-                //console.log(canvas.toDataURL('png'));
-                download("canvas.toDataURL('png')", "factory-output.png", "image/png");
-
-            }
-
-            //载入图片
-            fabric.Image.fromURL('moren.jpg', function(oImg) {
-                 canvas.add(oImg);
-                 });
-
-          </script>
+         
 
 
            </body>
