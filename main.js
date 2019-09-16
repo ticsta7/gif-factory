@@ -22,7 +22,7 @@ $(function(){
             console.log(`top = ${obj.top}`);
             console.log(`left = ${obj.left}`);
             console.log(`angle = ${obj.angle}`);
-            console.log(`scaleX = ${obj.scaleX}`);
+              console.log(`scaleX = ${obj.scaleX}`);
             console.log(`scaleY = ${obj.scaleY}`);
         // }
     }
@@ -62,5 +62,18 @@ $(function(){
             cornerColor:'red',
             borderColor:'red',
             borderSize:3  });
+
+
+            // 监听键盘
+
+            var listener = new keypress.Listener();
+            
+            listener.simple_combo('shift',()=>
+            {
+                var obj = canvas.getActiveObject();
+                if( obj ) {
+                    canvas.remove( obj );                    
+                }
+            })
 });
 

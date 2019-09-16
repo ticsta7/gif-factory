@@ -184,6 +184,15 @@ $(function () {
     cornerColor: 'red',
     borderColor: 'red',
     borderSize: 3
+  }); // 监听键盘
+
+  var listener = new keypress.Listener();
+  listener.simple_combo('shift', function () {
+    var obj = canvas.getActiveObject();
+
+    if (obj) {
+      canvas.remove(obj);
+    }
   });
 });
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
