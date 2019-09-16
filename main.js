@@ -9,7 +9,8 @@ $(function(){
         download("canvas.toDataURL('png')", "factory-output.png", "image/png");
     }
     
-    // getActiveObject 和 insertAt 方法 => http://fabricjs.com/docs/fabric.Canvas.html
+    // getActiveObject 和 insertAt 方法
+    //  http://fabricjs.com/docs/fabric.Canvas.html
     
     //info按钮 
     outputInfo = function()
@@ -36,17 +37,30 @@ $(function(){
          oImg.set('angle',0);
          oImg.set('scaleX',1);
          oImg.set('scaleY',1);
-
+         oImg.set({
+                cornerSize:15,
+                padding:5,
+                transparentCorners:true,//顶角 是否为空心
+                cornerStyle:'circle',
+                cornerColor:'red',
+                borderColor:'red',
+                borderSize:3  });
          });
-  
-         var text = new fabric.Text('又出bug了？',  {  left: 100, top: 100 });
-         canvas.insertAt(text,1);
-         text.set('top',347);
+         var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
+         canvas.insertAt(text,2);
+         text.set('top',350);
          text.set('left',110);
          text.set('angle',0);
          text.set('scaleX',1);
          text.set('scaleY',1);
-        
-  
+         text.set('fill','red');
+         // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
+         text.set({cornerSize:15,
+            padding:5,
+            transparentCorners:true,//顶角 是否为空心
+            cornerStyle:'circle',
+            cornerColor:'red',
+            borderColor:'red',
+            borderSize:3  });
 });
 
