@@ -122,14 +122,64 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 $(function () {
   var canvas = new fabric.Canvas('workSpace', {
     preserveObjectStacking: true
-  }); //download按钮
+  });
+
+  document.onkeydown = function (event) {
+    var e = event || window.event || arguments.callee.caller.arguments[0];
+    console.log('e.keycode', e.keyCode);
+
+    if (e && e.keyCode == 46 || e.keyCode == 8) // delete 键
+      {
+        // 删除图层用
+        var obj = canvas.getActiveObject();
+
+        if (obj) {
+          canvas.remove(obj);
+        }
+      }
+
+    ;
+
+    if (e && e.keyCode == 188) // < 键
+      {
+        //图层向下
+        var obj = canvas.getActiveObject();
+
+        if (obj) {
+          canvas.sendBackwards(obj);
+        }
+      }
+
+    ;
+
+    if (e && e.keyCode == 190) // > 键
+      {
+        //图层向上
+        var obj = canvas.getActiveObject();
+
+        if (obj) {
+          canvas.bringForward(obj);
+        }
+      }
+
+    ;
+    $(canvas.getObjects()).each(function (index, item) {
+      console.log(item.type);
+    }); // textInit();
+  }; // textInit = function()
+  // {
+  //     $(canvas.getObjects()).each( ( index ,item ) =>
+  //     {
+  //         console.log( item.type );
+  //     }); 
+  // }
+  //download按钮
+
 
   downloadImg = function downloadImg() {
     //console.log(canvas.toDataURL('png'));
     download("canvas.toDataURL('png')", "factory-output.png", "image/png");
-  }; // getActiveObject 和 insertAt 方法
-  //  http://fabricjs.com/docs/fabric.Canvas.html
-  //info按钮 
+  }; //info按钮 
 
 
   outputInfo = function outputInfo() {
@@ -169,11 +219,11 @@ $(function () {
   });
   canvas.insertAt(text, 2);
   text.set('top', 350);
-  text.set('left', 110);
+  text.set('left', 145);
   text.set('angle', 0);
-  text.set('scaleX', 1);
-  text.set('scaleY', 1);
-  text.set('fill', 'red'); // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
+  text.set('scaleX', 0.68);
+  text.set('scaleY', 0.68);
+  text.set('fill', 'black'); // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
 
   text.set({
     cornerSize: 15,
@@ -185,15 +235,16 @@ $(function () {
     borderColor: 'red',
     borderSize: 3
   }); // 监听键盘
-
-  var listener = new keypress.Listener();
-  listener.simple_combo('shift', function () {
-    var obj = canvas.getActiveObject();
-
-    if (obj) {
-      canvas.remove(obj);
-    }
-  });
+  // var listener = new keypress.Listener();
+  // listener.simple_combo('backspace',()=>
+  // {
+  //     var obj = canvas.getActiveObject();
+  //     if( obj ) {
+  //         canvas.remove( obj );                    
+  //     }
+  // })
+  // getActiveObject(),insertAt(),sendBackwards(),bringForward
+  //  http://fabricjs.com/docs/fabric.Canvas.html
 });
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
