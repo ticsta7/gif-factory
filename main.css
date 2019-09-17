@@ -15,5 +15,23 @@ canvas
 
 .form-group input
 {
-    max-width: 3 00px;
+    max-width: 300px;
 }
+/* > 是什么意思？？ */
+.gifList > li img 
+{
+    max-width: 200px;
+}
+
+.gifList > li
+{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.gifList
+{
+    padding: 0px;
+}
+
+

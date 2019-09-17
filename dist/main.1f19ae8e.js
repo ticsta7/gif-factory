@@ -123,6 +123,7 @@ $(function () {
   var canvas = new fabric.Canvas('workSpace', {
     preserveObjectStacking: true
   });
+  canvas.backgroundColor = 'rgba (255,255,255,1)';
 
   document.onkeydown = function (event) {
     var e = event || window.event || arguments.callee.caller.arguments[0];
@@ -192,6 +193,32 @@ $(function () {
     console.log("angle = ".concat(obj.angle));
     console.log("scaleX = ".concat(obj.scaleX));
     console.log("scaleY = ".concat(obj.scaleY)); // }
+  }; //加入gif列表    
+
+
+  addToGif = function addToGif() {
+    var dataUrl = canvas.toDataURL('png');
+    var li = $("<li><img src='" + dataUrl + "'/></li>");
+    $(".gifList").append(li);
+  }; //下载Gif
+
+
+  downloadGif = function downloadGif() {
+    var gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width: 460,
+      height: 460
+    });
+    $('.gifList li img').each(function (index, item) {
+      gif.addFrame(item, {
+        delay: 1000
+      });
+    });
+    gif.on('finished', function (blob) {
+      download(blob, "test.gif", "image/gif");
+    });
+    gif.render();
   }; //载入图片
 
 
@@ -212,7 +239,8 @@ $(function () {
       borderColor: 'red',
       borderSize: 3
     });
-  });
+  }); //  载入文字
+
   var text = new fabric.Text('又出bug了？', {
     left: 110,
     top: 350
@@ -274,7 +302,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63892" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65417" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

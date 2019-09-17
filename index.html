@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- 前端库的调用    -->
+    <!-- 前端库的调用    
+      gif.js 会用到 gif.worker.js
+      如果直接载入worker.js 就报错了
+      解决方法：在gif.js里面 动态添加（怎么个动态法？）
+    -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/fabric.js/3.4.0/fabric.min.js"></script>
+    <script src="https://cdn.bootcss.com/gif.js/0.1.5/gif.js"></script>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/downloadjs/1.4.8/download.min.js"></script>
     <script src="https://cdn.bootcss.com/keypress/2.1.5/keypress.min.js"></script>
@@ -37,19 +42,26 @@
             <canvas  id="workSpace" width="460" height="460"></canvas>
             <!-- nav 标签 main 标签？？？ -->
             
+            
             <div class="Btn">
-
-                <button class="btn btn-primary" onclick="downloadImg()">Download</button>
+              <!-- 各种button -->
                 <button class="btn btn-outline-info" onclick="outputInfo()">Info</button>
-
+                <button class="btn btn-outline-info" onclick="addToGif()">添加至GIF制作序列</button>
+                <button class="btn btn-primary" onclick="downloadImg()">Download IMG</button>
+                <button class="btn btn-primary" onclick="downloadGif()">Download GIF</button>
+                
             </div>
 
+            <!-- 文字修改框 -->
             <div class="form-group">
                 <input class="form-control" 
                 type="text"  id="theText" 
                 placeholder="点击文字进行修改"
                 disabled='disabled'>
             </div>
+
+            <!-- 制作动图列表 -->
+            <ul class="gifList"></ul>
 
           </main>
         </div>

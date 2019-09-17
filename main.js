@@ -2,6 +2,7 @@
 $(function(){
     var canvas = new fabric.Canvas('workSpace',{preserveObjectStacking:true});
     
+    canvas.backgroundColor = 'rgba (255,255,255,1)';
     document.onkeydown = function(event) {
         var e = event || window.event ||
         arguments.callee.caller.arguments[0];
@@ -49,7 +50,6 @@ $(function(){
     //         console.log( item.type );
     //     }); 
     // }
-        
     
     
 
@@ -74,8 +74,42 @@ $(function(){
             console.log(`scaleY = ${obj.scaleY}`);
         // }
     }
-  
-  
+    //加入gif列表    
+    addToGif = function()
+    {
+      var dataUrl = canvas.toDataURL('png');
+      var li = $("<li><img src='" + dataUrl +"'/></li>");
+      $(".gifList").append( li  );  
+    }
+    //下载Gif
+    downloadGif = function()
+    {
+        var gif = new GIF({
+            workers: 2,
+            quality: 10,
+            width: 460, 
+            height: 460
+          });
+        
+        $('.gifList li img').each((index,item)=>
+        {
+            gif.addFrame( item,{ delay: 1000 }); 
+        });
+
+        gif.on('finished', function(blob) {
+            download(blob, "test.gif", "image/gif") ;
+
+        });
+
+        gif.render();
+
+    }
+    
+    
+
+
+
+
     //载入图片
     fabric.Image.fromURL('moren.jpg', function(oImg) 
         {
@@ -94,7 +128,8 @@ $(function(){
                 borderColor:'red',
                 borderSize:3  });
          });
-         var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
+        //  载入文字
+    var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
          canvas.insertAt(text,2);
          text.set('top',350);
          text.set('left',145);
