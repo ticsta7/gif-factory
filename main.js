@@ -1,5 +1,6 @@
 // 页面渲染完之后 加载
 $(function(){
+
     var canvas = new fabric.Canvas('workSpace',{preserveObjectStacking:true});
     
     // canvas.backgroundColor = rgba (255,255,255,1),
@@ -40,10 +41,10 @@ $(function(){
     textInit = function(){
         $(canvas.getObjects()).each((index ,item) =>
         {
-            console.log( item );
+            //console.log( item );
             //循环得到的type=text的时候
             if(item.type=='text'){
-                
+
                 item.on( "selected", ()=>
                 {
                     $('#theText').attr('disabled',false);
@@ -75,7 +76,8 @@ $(function(){
     downloadImg = function()
     {
          //console.log(canvas.toDataURL('png'));
-        download("canvas.toDataURL('jpg')", "factory-output", "image/jpg");
+        download(canvas.toDataURL(), "factory-output.png", "image/png");
+        
     }
     //info按钮 
     outputInfo = function()

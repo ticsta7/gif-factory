@@ -162,21 +162,21 @@ $(function () {
       }
 
     ;
-  }; // textInit() ;
-  //监听canvas容器内的点击事件，一旦点击，去初始化文字
+  }; //监听canvas容器内的点击事件，一旦点击，去初始化文字
+  // $('.canvas-container').on('click', function(){
+  //     textInit()   
+  // })
 
-
-  $('.canvas-container').on('click', function () {
-    textInit();
-  });
 
   textInit = function textInit() {
     $(canvas.getObjects()).each(function (index, item) {
-      console.log(item); //循环得到的type=text的时候
-
+      //console.log( item );
+      //循环得到的type=text的时候
       if (item.type == 'text') {
-        $('#theText').attr('disabled', false);
-        $('#theText').val(item.text);
+        item.on("selected", function () {
+          $('#theText').attr('disabled', false);
+          $('#theText').val(item.text);
+        });
       }
     });
   };
@@ -185,30 +185,16 @@ $(function () {
     var t = $("#theText").val();
 
     if (t.length > 0) {
-      var e = canvas.getActiveObject();
-      console.log(e), e.set("text", t), canvas.discardActiveObject(), canvas.renderAll(), $("#theText").val(""), $("#theText").attr("disabled", !0);
+      var e = canvas.getActiveObject(); //console.log(e),
+
+      e.set("text", t), canvas.discardActiveObject(), canvas.renderAll(), $("#theText").val(""), $("#theText").attr("disabled", !0);
     }
-  }; // textInit = function()
-  // {
-  //     $(canvas.getObjects()).each( ( index ,item ) =>
-  //     {
-  //         console.log( item.type );
-  //         // if( item.type == 'text')
-  //         // {
-  //         //     item.on( "selected", ()=>
-  //         //     {
-  //         //         console.log( item );
-  //         //         $('#text').val(item.text);
-  //         //     } );
-  //         // }
-  //     }); 
-  // }
-  //download按钮
+  }; //download按钮
 
 
   downloadImg = function downloadImg() {
     //console.log(canvas.toDataURL('png'));
-    download("canvas.toDataURL('jpg')", "factory-output", "image/jpg");
+    download(canvas.toDataURL(), "factory-output.png", "image/png");
   }; //info按钮 
 
 
@@ -272,7 +258,10 @@ $(function () {
     cornerColor: 'red',
     borderColor: 'red',
     borderSize: 3
-  }); //载入图片
+  }); // $('.canvas-container').on('click', function(){
+  //       textInit()   
+  //      })
+  //载入图片
 
   fabric.Image.fromURL('moren.jpg', function (oImg) {
     canvas.insertAt(oImg, 0);
@@ -294,6 +283,8 @@ $(function () {
   });
   canvas.backgroundColor = "rgba(255,255,255,1)"; // getActiveObject(),insertAt(),sendBackwards(),bringForward
   // http://fabricjs.com/docs/fabric.Canvas.html
+
+  textInit();
 });
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -323,7 +314,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55147" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65449" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
