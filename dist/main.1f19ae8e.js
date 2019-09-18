@@ -162,9 +162,32 @@ $(function () {
       }
 
     ;
+  }; // textInit() ;
+  //监听canvas容器内的点击事件，一旦点击，去初始化文字
+
+
+  $('.canvas-container').on('click', function () {
+    textInit();
+  });
+
+  textInit = function textInit() {
     $(canvas.getObjects()).each(function (index, item) {
-      console.log(item.type);
-    }); //  textInit();
+      console.log(item); //循环得到的type=text的时候
+
+      if (item.type == 'text') {
+        $('#theText').attr('disabled', false);
+        $('#theText').val(item.text);
+      }
+    });
+  };
+
+  update_text = function update_text() {
+    var t = $("#theText").val();
+
+    if (t.length > 0) {
+      var e = canvas.getActiveObject();
+      console.log(e), e.set("text", t), canvas.discardActiveObject(), canvas.renderAll(), $("#theText").val(""), $("#theText").attr("disabled", !0);
+    }
   }; // textInit = function()
   // {
   //     $(canvas.getObjects()).each( ( index ,item ) =>
@@ -300,7 +323,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65417" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55147" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

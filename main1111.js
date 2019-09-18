@@ -30,45 +30,34 @@ $(function(){
             }
         };
 
+
+        // $(canvas.getObjects()).each( ( index ,item ) =>
+        // {
+        //     console.log( item.type );
+        // }); 
+
+
+          textInit();
+
     };
 
-    
-    //监听canvas容器内的点击事件，一旦点击，去初始化文字
-    // $('.canvas-container').on('click', function(){
-    //     textInit()   
-    // })
-    textInit = function(){
-        $(canvas.getObjects()).each((index ,item) =>
+    textInit = function()
+    {
+        $(canvas.getObjects()).each( ( index ,item ) =>
         {
-            console.log( item );
-            //循环得到的type=text的时候
-            if(item.type=='text'){
-                
-                item.on( "selected", ()=>
-                {
-                    $('#theText').attr('disabled',false);
-                    $('#theText').val(item.text);
+            console.log( item.type );
 
-                } );
-                
-            }
+            // if( item.type == 'text')
+            // {
+            //     item.on( "selected", ()=>
+            //     {
+            //         console.log( item );
+            //         $('#text').val(item.text);
+            //     } );
+            // }
         }); 
     }
-
-    update_text = function(){
-        var t = $("#theText").val();
-        if (t.length > 0) {
-            var e = canvas.getActiveObject();
-            //console.log(e),
-            e.set("text", t),
-            canvas.discardActiveObject(),
-            canvas.renderAll(),
-            $("#theText").val(""),
-            $("#theText").attr("disabled", !0)
-        }
-    }
-
-  
+    
     
 
     //download按钮
@@ -141,10 +130,6 @@ $(function(){
             cornerColor:'red',
             borderColor:'red',
             borderSize:3  });
-            
-            // $('.canvas-container').on('click', function(){
-            //       textInit()   
-            //      })
 
     //载入图片
     fabric.Image.fromURL('moren.jpg', function(oImg) 
@@ -168,14 +153,14 @@ $(function(){
 
             
         canvas.backgroundColor = "rgba(255,255,255,1)";
-        
+
            
 
       // getActiveObject(),insertAt(),sendBackwards(),bringForward
       // http://fabricjs.com/docs/fabric.Canvas.html
 
 
-      textInit(); 
+            
 
             
 });
