@@ -258,10 +258,7 @@ $(function () {
     cornerColor: 'red',
     borderColor: 'red',
     borderSize: 3
-  }); // $('.canvas-container').on('click', function(){
-  //       textInit()   
-  //      })
-  //载入图片
+  }); //载入图片
 
   fabric.Image.fromURL('moren.jpg', function (oImg) {
     canvas.insertAt(oImg, 0);
@@ -280,8 +277,28 @@ $(function () {
       borderColor: 'red',
       borderSize: 3
     });
-  });
-  canvas.backgroundColor = "rgba(255,255,255,1)"; // getActiveObject(),insertAt(),sendBackwards(),bringForward
+  }); // 复制图层 （ \ )
+
+  copyTuceng = function copyTuceng() {
+    var oldObject = canvas.getActiveObject();
+
+    if (oldObject) {
+      console.log(oldObject);
+      var clObject = fabric.util.object.clone(oldObject);
+      console.log(clObject); //位移一点点，别重合
+
+      clObject.set("top", clObject.top + 20);
+      clObject.set("left", clObject.left + 20);
+      canvas.add(clObject);
+      canvas.setActiveObject(clObject);
+      canvas.renderAll(); // reinit()
+    } else alert("请先选中图层");
+  }; // GIF序列双击，删除图层
+
+
+  $(".gifList").on("dblclick", "li", function () {
+    $(this).remove();
+  }), canvas.backgroundColor = "rgba(255,255,255,1)"; // getActiveObject(),insertAt(),sendBackwards(),bringForward
   // http://fabricjs.com/docs/fabric.Canvas.html
 
   textInit();

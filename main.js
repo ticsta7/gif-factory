@@ -127,7 +127,7 @@ $(function(){
 
     
         //  载入文字
-         var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
+     var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
          canvas.insertAt(text,2);
          text.set('top',350);
          text.set('left',145);
@@ -144,12 +144,10 @@ $(function(){
             borderColor:'red',
             borderSize:3  });
             
-            // $('.canvas-container').on('click', function(){
-            //       textInit()   
-            //      })
 
     //载入图片
-    fabric.Image.fromURL('moren.jpg', function(oImg) 
+    fabric.Image.fromURL('moren.jpg', 
+    function(oImg) 
         {
          canvas.insertAt(oImg,0);
          oImg.set('top',104);
@@ -168,6 +166,30 @@ $(function(){
          });
 
 
+
+            // 复制图层 （ \ )
+            copyTuceng = function () {
+                var oldObject = canvas.getActiveObject();
+                if ( oldObject ) {
+                    console.log(oldObject);
+                    var clObject = fabric.util.object.clone(oldObject);
+                    console.log(clObject);
+                    //位移一点点，别重合
+                    clObject.set("top", clObject.top + 20);
+                    clObject.set("left", clObject.left + 20);
+                    canvas.add(clObject);
+                    canvas.setActiveObject(clObject);
+                    canvas.renderAll();
+                    // reinit()
+                } else
+                    alert("请先选中图层");
+            }
+
+            // GIF序列双击，删除图层
+            $(".gifList").on("dblclick", "li", function() {
+                $(this).remove()
+            }),
+           
             
         canvas.backgroundColor = "rgba(255,255,255,1)";
         
