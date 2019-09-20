@@ -7,7 +7,7 @@
     <!-- 前端库的调用    
       gif.js 会用到 gif.worker.js
       如果直接载入worker.js 就报错了
-      解决方法：在gif.js里面 动态添加（怎么个动态法？）
+      解决方法：在gif.js里面 动态添加 main.js里 生成gif函数里面加url 
     -->
     <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -43,25 +43,46 @@
             <!-- nav 标签 main 标签？？？ -->
             
             
-            <div class="Btn">
-              <!-- 各种button -->
-                <button class="btn btn-outline-info" onclick="outputInfo()">Info</button>
-                <button class="btn btn-outline-info" onclick="addToGif()">添加至GIF制作序列</button>
-                <button class="btn btn-outline-info" onclick="copyTuceng()">复制此图层</button>
-                <button class="btn btn-primary" onclick="downloadImg()">Download IMG</button>
-                <button class="btn btn-primary" onclick="downloadGif()">Download GIF</button>
-                
+            <div class="btn_input">
+                <div class="Btn">
+                    <!-- 各种button -->
+                      <button class="btn btn-outline-info" onclick="outputInfo()">Info</button>
+                      <button class="btn btn-outline-info" onclick="addToGif()">添加至GIF制作序列</button>
+                      <button class="btn btn-outline-info" onclick="copyTuceng()">复制此图层</button>
+                      <button class="btn btn-primary" onclick="downloadImg()">Download IMG</button>
+                      <button class="btn btn-primary" onclick="downloadGif()">Download GIF</button>
+                      
+                  </div>
+      
+                  
+                  <div class="form-group">
+                      <!-- 字体颜色 用radio -->
+                      <input class="theColor" 
+                      type="radio" name="theColor">white
+                      <input class="theColor" 
+                      type="radio" name="theColor">black
+                      
+                      <!-- 文字修改框 -->
+                      <input class="form-control" 
+                      type="text"  id="theText" 
+                      placeholder="点击文字进行修改"
+                      disabled='disabled'
+                      onchange='update_text()'>
+                      
+                      <!-- 输入gif延迟框 -->
+                      <input class="form-control" 
+                      type="text"  id="theDelay" 
+                      placeholder="gif间隔时间（ms）">
+      
+                      
+      
+                  </div>
             </div>
+            
 
-            <!-- 文字修改框 -->
-            <div class="form-group">
-                <input class="form-control" 
-                type="text"  id="theText" 
-                placeholder="点击文字进行修改"
-                disabled='disabled'
-                onchange='update_text()'>
-            </div>
+          
 
+           
             <!-- 制作动图列表 -->
             <ul class="gifList"></ul>
 

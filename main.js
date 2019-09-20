@@ -1,6 +1,6 @@
 // 页面渲染完之后 加载
 $(function(){
-
+    
     var canvas = new fabric.Canvas('workSpace',{preserveObjectStacking:true});
     
     // canvas.backgroundColor = rgba (255,255,255,1),
@@ -33,11 +33,6 @@ $(function(){
 
     };
 
-    
-    //监听canvas容器内的点击事件，一旦点击，去初始化文字
-    // $('.canvas-container').on('click', function(){
-    //     textInit()   
-    // })
     textInit = function(){
         $(canvas.getObjects()).each((index ,item) =>
         {
@@ -103,16 +98,26 @@ $(function(){
     //下载Gif
     downloadGif = function()
     {
+        var theDelay = $("#theDelay").val();
+       
+        if ($(".gifList li img").length < 2)
+            return alert("素材数量需≥2");
+        
         var gif = new GIF({
+            workerScript: "gif.worker.js",
             workers: 2,
             quality: 10,
             width: 460, 
             height: 460
           });
         
+          
+          if ( theDelay == 0 )
+          return alert("请设置间隔时间");
+
         $('.gifList li img').each((index,item)=>
         {
-            gif.addFrame( item,{ delay: 1000 }); 
+            gif.addFrame( item,{ delay: theDelay }); 
         });
 
         gif.on('finished', function(blob) 
@@ -128,13 +133,14 @@ $(function(){
     
         //  载入文字
      var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
+        
          canvas.insertAt(text,2);
          text.set('top',350);
          text.set('left',145);
          text.set('angle',0);
          text.set('scaleX',0.68);
          text.set('scaleY',0.68);
-         text.set('fill','black');
+         
          // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
          text.set({cornerSize:15,
             padding:5,
@@ -167,13 +173,13 @@ $(function(){
 
 
 
-            // 复制图层 （ \ )
+            // 复制图层 
             copyTuceng = function () {
                 var oldObject = canvas.getActiveObject();
                 if ( oldObject ) {
-                    console.log(oldObject);
+                    // console.log(oldObject);
                     var clObject = fabric.util.object.clone(oldObject);
-                    console.log(clObject);
+                    // console.log(clObject);
                     //位移一点点，别重合
                     clObject.set("top", clObject.top + 20);
                     clObject.set("left", clObject.left + 20);

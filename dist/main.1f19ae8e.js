@@ -162,11 +162,7 @@ $(function () {
       }
 
     ;
-  }; //监听canvas容器内的点击事件，一旦点击，去初始化文字
-  // $('.canvas-container').on('click', function(){
-  //     textInit()   
-  // })
-
+  };
 
   textInit = function textInit() {
     $(canvas.getObjects()).each(function (index, item) {
@@ -219,15 +215,19 @@ $(function () {
 
 
   downloadGif = function downloadGif() {
+    var theDelay = $("#theDelay").val();
+    if ($(".gifList li img").length < 2) return alert("素材数量需≥2");
     var gif = new GIF({
+      workerScript: "gif.worker.js",
       workers: 2,
       quality: 10,
       width: 460,
       height: 460
     });
+    if (theDelay == 0) return alert("请设置间隔时间");
     $('.gifList li img').each(function (index, item) {
       gif.addFrame(item, {
-        delay: 1000
+        delay: theDelay
       });
     });
     gif.on('finished', function (blob) {
@@ -246,8 +246,7 @@ $(function () {
   text.set('left', 145);
   text.set('angle', 0);
   text.set('scaleX', 0.68);
-  text.set('scaleY', 0.68);
-  text.set('fill', 'black'); // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
+  text.set('scaleY', 0.68); // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
 
   text.set({
     cornerSize: 15,
@@ -277,15 +276,15 @@ $(function () {
       borderColor: 'red',
       borderSize: 3
     });
-  }); // 复制图层 （ \ )
+  }); // 复制图层 
 
   copyTuceng = function copyTuceng() {
     var oldObject = canvas.getActiveObject();
 
     if (oldObject) {
-      console.log(oldObject);
-      var clObject = fabric.util.object.clone(oldObject);
-      console.log(clObject); //位移一点点，别重合
+      // console.log(oldObject);
+      var clObject = fabric.util.object.clone(oldObject); // console.log(clObject);
+      //位移一点点，别重合
 
       clObject.set("top", clObject.top + 20);
       clObject.set("left", clObject.left + 20);
