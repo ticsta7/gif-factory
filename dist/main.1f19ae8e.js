@@ -246,7 +246,8 @@ $(function () {
   text.set('left', 145);
   text.set('angle', 0);
   text.set('scaleX', 0.68);
-  text.set('scaleY', 0.68); // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
+  text.set('scaleY', 0.68);
+  text.set('fill', 'black'); // 修改颜色 http://fabricjs.com/docs/fabric.Object.html#fill
 
   text.set({
     cornerSize: 15,
@@ -297,7 +298,18 @@ $(function () {
 
   $(".gifList").on("dblclick", "li", function () {
     $(this).remove();
-  }), canvas.backgroundColor = "rgba(255,255,255,1)"; // getActiveObject(),insertAt(),sendBackwards(),bringForward
+  }); // 改变字体颜色
+
+  $('input:radio').change(function () {
+    var theTextColor = $('input:radio:checked').val();
+    var obj = canvas.getActiveObject();
+
+    if (obj) {
+      text.set('fill', theTextColor);
+      canvas.renderAll();
+    }
+  });
+  canvas.backgroundColor = "rgba(255,255,255,1)"; // getActiveObject(),insertAt(),sendBackwards(),bringForward
   // http://fabricjs.com/docs/fabric.Canvas.html
 
   textInit();
