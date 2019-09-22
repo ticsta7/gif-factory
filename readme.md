@@ -3,3 +3,5 @@
 
 ### v1.1：
 基本功能添加完毕
+
+ ![img](https://github.com/ticsta7/gif-factory/blob/master/项目演示.gif)  
