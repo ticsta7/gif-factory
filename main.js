@@ -39,7 +39,6 @@ $(function(){
             //console.log( item );
             //循环得到的type=text的时候
             if(item.type=='text'){
-
                 item.on( "selected", ()=>
                 {
                     $('#theText').attr('disabled',false);
@@ -110,7 +109,6 @@ $(function(){
             width: 460, 
             height: 460
           });
-        
           
           if ( theDelay == 0 )
           return alert("请设置间隔时间");
@@ -132,7 +130,7 @@ $(function(){
 
     
         //  载入文字
-     var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
+        var text = new fabric.Text('又出bug了？',  {  left: 110, top: 350 });
         
          canvas.insertAt(text,2);
          text.set('top',350);
@@ -151,17 +149,17 @@ $(function(){
             borderSize:3  });
             
 
-    //载入图片
-    fabric.Image.fromURL('moren.jpg', 
-    function(oImg) 
-        {
-         canvas.insertAt(oImg,0);
-         oImg.set('top',104);
-         oImg.set('left',72);
-         oImg.set('angle',0);
-         oImg.set('scaleX',1);
-         oImg.set('scaleY',1);
-         oImg.set({
+             //载入图片
+             fabric.Image.fromURL('moren.jpg', 
+             function(oImg) 
+            {
+                canvas.insertAt(oImg,0);
+                oImg.set('top',104);
+                oImg.set('left',72);
+                oImg.set('angle',0);
+                oImg.set('scaleX',1);
+                oImg.set('scaleY',1);
+                oImg.set({
                 cornerSize:15,
                 padding:5,
                 transparentCorners:true,//顶角 是否为空心
@@ -169,7 +167,7 @@ $(function(){
                 cornerColor:'red',
                 borderColor:'red',
                 borderSize:3  });
-         });
+             });
 
 
 
@@ -196,25 +194,19 @@ $(function(){
                 $(this).remove()
             });
            
-            // 改变字体颜色
-            
+            // 改变字体颜色     
             $('input:radio').change(function()
             {
-                var theTextColor = $('input:radio:checked').val();       
-                var obj = canvas.getActiveObject();
-                if(obj)
-                {
-                    text.set('fill',theTextColor);
-                    canvas.renderAll();
-                }
-                
+                var theTextColor = $('input:radio:checked').val();  
+                text.set('fill',theTextColor);
+                canvas.renderAll();      
             });
             
         canvas.backgroundColor = "rgba(255,255,255,1)";
         
         
 
-      // getActiveObject(),insertAt(),sendBackwards(),bringForward
+      // render(),renderall，insertAt(),sendBackwards(),bringForward
       // http://fabricjs.com/docs/fabric.Canvas.html
 
 

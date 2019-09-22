@@ -298,18 +298,14 @@ $(function () {
 
   $(".gifList").on("dblclick", "li", function () {
     $(this).remove();
-  }); // 改变字体颜色
+  }); // 改变字体颜色     
 
   $('input:radio').change(function () {
     var theTextColor = $('input:radio:checked').val();
-    var obj = canvas.getActiveObject();
-
-    if (obj) {
-      text.set('fill', theTextColor);
-      canvas.renderAll();
-    }
+    text.set('fill', theTextColor);
+    canvas.renderAll();
   });
-  canvas.backgroundColor = "rgba(255,255,255,1)"; // getActiveObject(),insertAt(),sendBackwards(),bringForward
+  canvas.backgroundColor = "rgba(255,255,255,1)"; // render(),renderall，insertAt(),sendBackwards(),bringForward
   // http://fabricjs.com/docs/fabric.Canvas.html
 
   textInit();
@@ -342,7 +338,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65449" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64539" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
